@@ -49,6 +49,27 @@
         </p>
       </section>
 
+      <section class="section dashboard-grid">
+        <article class="dashboard-card">
+          <p class="section-kicker">Progress</p>
+          <h2>学习进度面板</h2>
+          <div class="progress-ring-card">
+            <div class="progress-ring" id="overall-progress-ring">
+              <strong id="overall-progress-value">0%</strong>
+            </div>
+            <div>
+              <p class="dashboard-copy">这里会汇总你在所有路线里的任务完成度，方便你快速判断最近是在积累，还是只在收藏。</p>
+              <p class="dashboard-copy" id="overall-progress-note">先选一条路线开始勾选任务。</p>
+            </div>
+          </div>
+        </article>
+        <article class="dashboard-card">
+          <p class="section-kicker">Resume</p>
+          <h2>继续学习</h2>
+          <div id="resume-panel" class="resume-panel"></div>
+        </article>
+      </section>
+
       <section class="section" id="roadmaps">
         <div class="section-heading">
           <p class="section-kicker">Roadmaps</p>
@@ -62,6 +83,14 @@
           <button class="route-chip" data-route="daily" role="tab" aria-selected="false">每日计划</button>
         </div>
         <div class="roadmap-panel" id="route-panel" aria-live="polite"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="section-kicker">Favorites</p>
+          <h2>已收藏资源</h2>
+        </div>
+        <div id="favorites-panel" class="favorites-panel"></div>
       </section>
 
       <section class="section framework-grid">

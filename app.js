@@ -307,10 +307,145 @@ const routePanel = document.getElementById("route-panel");
 const routeButtons = document.querySelectorAll(".route-chip");
 const checkboxes = document.querySelectorAll('input[type="checkbox"][data-check]');
 const resetButton = document.getElementById("reset-progress");
+const overallProgressValue = document.getElementById("overall-progress-value");
+const overallProgressRing = document.getElementById("overall-progress-ring");
+const overallProgressNote = document.getElementById("overall-progress-note");
+const resumePanel = document.getElementById("resume-panel");
+const favoritesPanel = document.getElementById("favorites-panel");
 const storageKey = "codex-practice-study-checks";
+const routeProgressKey = "codex-practice-route-progress";
+const favoriteResourcesKey = "codex-practice-favorite-resources";
+const activeRouteKey = "codex-practice-active-route";
+
+function getRouteTasks(routeKey) {
+  return routes[routeKey].phases.flatMap((phase, phaseIndex) =>
+    phase.tasks.map((task, taskIndex) => ({
+      id: `${routeKey}-${phaseIndex}-${taskIndex}`,
+      phaseTitle: phase.title,
+      label: task
+    }))
+  );
+}
+
+function readRouteProgress() {
+  try {
+    return JSON.parse(localStorage.getItem(routeProgressKey) || "{}");
+  } catch (error) {
+    return {};
+  }
+}
+
+function writeRouteProgress(progress) {
+  localStorage.setItem(routeProgressKey, JSON.stringify(progress));
+}
+
+function readFavoriteResources() {
+  try {
+    return JSON.parse(localStorage.getItem(favoriteResourcesKey) || "[]");
+  } catch (error) {
+    return [];
+  }
+}
+
+function writeFavoriteResources(items) {
+  localStorage.setItem(favoriteResourcesKey, JSON.stringify(items));
+}
+
+function getRouteCompletion(routeKey) {
+  const progress = readRouteProgress();
+  const tasks = getRouteTasks(routeKey);
+  const completed = tasks.filter((task) => progress[task.id]).length;
+  return {
+    total: tasks.length,
+    completed,
+    percent: tasks.length ? Math.round((completed / tasks.length) * 100) : 0
+  };
+}
+
+function getOverallCompletion() {
+  const keys = Object.keys(routes);
+  const totals = keys.map(getRouteCompletion);
+  const totalTasks = totals.reduce((sum, item) => sum + item.total, 0);
+  const totalCompleted = totals.reduce((sum, item) => sum + item.completed, 0);
+  return {
+    totalTasks,
+    totalCompleted,
+    percent: totalTasks ? Math.round((totalCompleted / totalTasks) * 100) : 0
+  };
+}
+
+function toggleRouteTask(taskId, checked) {
+  const progress = readRouteProgress();
+  progress[taskId] = checked;
+  writeRouteProgress(progress);
+}
+
+function toggleFavoriteResource(item) {
+  const favorites = readFavoriteResources();
+  const exists = favorites.some((favorite) => favorite.url === item.url);
+  const next = exists
+    ? favorites.filter((favorite) => favorite.url !== item.url)
+    : [item, ...favorites];
+  writeFavoriteResources(next);
+  renderFavorites();
+  updateDashboard();
+}
+
+function createResourceSection(title, items, category, routeTitle) {
+  const favorites = readFavoriteResources();
+  return `
+    <section class="resource-card">
+      <p class="section-kicker">${category}</p>
+      <h4>${title}</h4>
+      <ul class="resource-list">
+        ${items.map((item) => {
+          const isFavorite = favorites.some((favorite) => favorite.url === item.url);
+          return `
+            <li class="resource-item">
+              <a href="${item.url}" target="_blank" rel="noreferrer">${item.label}</a>
+              <button
+                class="favorite-toggle ${isFavorite ? "saved" : ""}"
+                data-favorite-route="${routeTitle}"
+                data-favorite-category="${category}"
+                data-favorite-label="${item.label}"
+                data-favorite-url="${item.url}"
+                type="button"
+              >${isFavorite ? "已收藏" : "收藏"}</button>
+            </li>
+          `;
+        }).join("")}
+      </ul>
+    </section>
+  `;
+}
+
+function bindRouteInteractions(routeKey) {
+  routePanel.querySelectorAll("[data-task-id]").forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      toggleRouteTask(checkbox.dataset.taskId, checkbox.checked);
+      updateDashboard();
+      renderRoute(routeKey);
+    });
+  });
+
+  routePanel.querySelectorAll("[data-favorite-url]").forEach((button) => {
+    button.addEventListener("click", () => {
+      toggleFavoriteResource({
+        route: button.dataset.favoriteRoute,
+        category: button.dataset.favoriteCategory,
+        label: button.dataset.favoriteLabel,
+        url: button.dataset.favoriteUrl
+      });
+      renderRoute(routeKey);
+    });
+  });
+}
 
 function renderRoute(routeKey) {
   const route = routes[routeKey];
+  localStorage.setItem(activeRouteKey, routeKey);
+  const progress = readRouteProgress();
+  const completion = getRouteCompletion(routeKey);
 
   routePanel.innerHTML = `
     <article class="roadmap-card">
@@ -321,41 +456,78 @@ function renderRoute(routeKey) {
         <span class="meta-pill">周期：${route.duration}</span>
         <span class="meta-pill">重点：${route.focus}</span>
         <span class="meta-pill">成果：${route.output}</span>
+        <span class="meta-pill">完成度：${completion.percent}%</span>
       </div>
       <div class="roadmap-grid">
-        ${route.phases.map((phase) => `
+        ${route.phases.map((phase, phaseIndex) => `
           <section class="phase-card">
             <h4>${phase.title}</h4>
             <p>${phase.body}</p>
-            <ul>
-              ${phase.tasks.map((task) => `<li>${task}</li>`).join("")}
+            <ul class="task-list">
+              ${phase.tasks.map((task, taskIndex) => {
+                const taskId = `${routeKey}-${phaseIndex}-${taskIndex}`;
+                return `
+                  <li>
+                    <label class="task-item">
+                      <input type="checkbox" data-task-id="${taskId}" ${progress[taskId] ? "checked" : ""}>
+                      <span>${task}</span>
+                    </label>
+                  </li>
+                `;
+              }).join("")}
             </ul>
           </section>
         `).join("")}
       </div>
       <div class="resource-groups">
-        <section class="resource-card">
-          <p class="section-kicker">Docs</p>
-          <h4>官方文档</h4>
-          <ul class="resource-list">
-            ${route.resources.docs.map((item) => `<li><a href="${item.url}" target="_blank" rel="noreferrer">${item.label}</a></li>`).join("")}
-          </ul>
-        </section>
-        <section class="resource-card">
-          <p class="section-kicker">Videos</p>
-          <h4>YouTube 学习入口</h4>
-          <ul class="resource-list">
-            ${route.resources.videos.map((item) => `<li><a href="${item.url}" target="_blank" rel="noreferrer">${item.label}</a></li>`).join("")}
-          </ul>
-        </section>
-        <section class="resource-card">
-          <p class="section-kicker">Repos</p>
-          <h4>项目仓库</h4>
-          <ul class="resource-list">
-            ${route.resources.repos.map((item) => `<li><a href="${item.url}" target="_blank" rel="noreferrer">${item.label}</a></li>`).join("")}
-          </ul>
-        </section>
+        ${createResourceSection("官方文档", route.resources.docs, "Docs", route.title)}
+        ${createResourceSection("YouTube 学习入口", route.resources.videos, "Videos", route.title)}
+        ${createResourceSection("项目仓库", route.resources.repos, "Repos", route.title)}
       </div>
+    </article>
+  `;
+  bindRouteInteractions(routeKey);
+  updateDashboard();
+}
+
+function renderFavorites() {
+  const favorites = readFavoriteResources();
+  if (!favorites.length) {
+    favoritesPanel.innerHTML = `
+      <article class="favorite-empty">
+        <p class="dashboard-copy">还没有收藏资源。看到合适的文档、视频或仓库时，点一下“收藏”就会汇总到这里。</p>
+      </article>
+    `;
+    return;
+  }
+
+  favoritesPanel.innerHTML = favorites.map((item) => `
+    <article class="favorite-card">
+      <p class="section-kicker">${item.category}</p>
+      <h3>${item.route}</h3>
+      <a href="${item.url}" target="_blank" rel="noreferrer">${item.label}</a>
+    </article>
+  `).join("");
+}
+
+function updateDashboard() {
+  const overall = getOverallCompletion();
+  const routeKey = localStorage.getItem(activeRouteKey) || "starter";
+  const route = routes[routeKey];
+  const routeTasks = getRouteTasks(routeKey);
+  const progress = readRouteProgress();
+  const nextTask = routeTasks.find((task) => !progress[task.id]);
+
+  overallProgressValue.textContent = `${overall.percent}%`;
+  overallProgressRing.style.setProperty("--progress-angle", `${overall.percent * 3.6}deg`);
+  overallProgressNote.textContent = `已完成 ${overall.totalCompleted} / ${overall.totalTasks} 个路线任务`;
+
+  resumePanel.innerHTML = `
+    <article class="resume-card">
+      <p class="section-kicker">Current Route</p>
+      <h3>${route.title}</h3>
+      <p class="dashboard-copy">${nextTask ? `下一步优先做：${nextTask.label}` : "当前路线任务都已完成，可以切换下一条路线了。"}</p>
+      <p class="dashboard-copy">${nextTask ? `所在阶段：${nextTask.phaseTitle}` : "建议去收藏区挑一个项目仓库开始实战。"}</p>
     </article>
   `;
 }
@@ -405,3 +577,5 @@ resetButton.addEventListener("click", () => {
 
 renderRoute("starter");
 loadChecklist();
+renderFavorites();
+updateDashboard();
