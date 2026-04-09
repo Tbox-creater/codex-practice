@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-page-title="网络与应用技术">
   <div class="page-shell">
     <nav class="top-nav">
       <a class="brand-link" href="index.html">学习路线图</a>
@@ -18,8 +18,11 @@
         <a class="nav-link" href="index.html">首页</a>
         <a class="nav-link" href="advanced.html">进阶路线</a>
         <a class="nav-link active" href="systems.html">网络与应用技术</a>
+        <a class="nav-link" href="database.html">数据库专题</a>
+        <a class="nav-link" href="os.html">操作系统</a>
         <a class="nav-link" href="interview.html">面试专题</a>
       </div>
+      <button class="theme-toggle" id="theme-toggle" type="button">切换夜间</button>
     </nav>
 
     <header class="hero compact-hero">
@@ -93,6 +96,18 @@
             <p>理解访问日志、应用日志、指标、链路追踪和告警，知道故障时先看什么。</p>
           </article>
         </div>
+        <div class="content-grid two-col section-gap-top">
+          <article class="content-card">
+            <h3>继续深入数据库</h3>
+            <p>如果你发现自己在网络和后端之间最卡的是数据建模、索引和事务，那么下一步最该去数据库专题。</p>
+            <a class="button secondary small" href="database.html">去数据库专题</a>
+          </article>
+          <article class="content-card">
+            <h3>继续深入操作系统</h3>
+            <p>如果你开始频繁接触并发、IO 和性能问题，操作系统专题会帮助你把很多“现象”变成“原理”。</p>
+            <a class="button secondary small" href="os.html">去操作系统专题</a>
+          </article>
+        </div>
       </section>
 
       <section class="section">
@@ -121,5 +136,6 @@
       </section>
     </main>
   </div>
+  <script src="shared.js"></script>
 </body>
 </html>

@@ -312,10 +312,23 @@ const overallProgressRing = document.getElementById("overall-progress-ring");
 const overallProgressNote = document.getElementById("overall-progress-note");
 const resumePanel = document.getElementById("resume-panel");
 const favoritesPanel = document.getElementById("favorites-panel");
+const routeSearch = document.getElementById("route-search");
+const routeFilters = document.getElementById("route-filters");
+const searchStatus = document.getElementById("search-status");
 const storageKey = "codex-practice-study-checks";
 const routeProgressKey = "codex-practice-route-progress";
 const favoriteResourcesKey = "codex-practice-favorite-resources";
 const activeRouteKey = "codex-practice-active-route";
+const routeFilterKey = "codex-practice-route-filter";
+const routeQueryKey = "codex-practice-route-query";
+
+const routeTags = {
+  starter: ["all", "python", "habit"],
+  frontend: ["all", "frontend"],
+  backend: ["all", "backend"],
+  python: ["all", "python"],
+  daily: ["all", "habit"]
+};
 
 function getRouteTasks(routeKey) {
   return routes[routeKey].phases.flatMap((phase, phaseIndex) =>
@@ -510,6 +523,41 @@ function renderFavorites() {
   `).join("");
 }
 
+function applyRouteDiscovery() {
+  if (!routeFilters || !searchStatus) return;
+  const activeFilter = localStorage.getItem(routeFilterKey) || "all";
+  const query = (localStorage.getItem(routeQueryKey) || "").trim().toLowerCase();
+  const matched = Object.entries(routes).filter(([key, route]) => {
+    const filterOk = activeFilter === "all" || routeTags[key]?.includes(activeFilter);
+    const text = `${route.title} ${route.summary} ${route.focus}`.toLowerCase();
+    const queryOk = !query || text.includes(query);
+    return filterOk && queryOk;
+  });
+
+  routeButtons.forEach((button) => {
+    const visible = matched.some(([key]) => key === button.dataset.route);
+    button.hidden = !visible;
+  });
+
+  if (!matched.length) {
+    searchStatus.textContent = "没有匹配的路线，可以换个关键词或筛选标签。";
+    return;
+  }
+
+  searchStatus.textContent = `当前找到 ${matched.length} 条路线：${matched.map(([, route]) => route.title).join("、")}`;
+  const currentActive = Array.from(routeButtons).find((button) => button.classList.contains("active") && !button.hidden);
+  if (!currentActive) {
+    const firstVisible = Array.from(routeButtons).find((button) => !button.hidden);
+    if (firstVisible) {
+      routeButtons.forEach((button) => {
+        button.classList.toggle("active", button === firstVisible);
+        button.setAttribute("aria-selected", String(button === firstVisible));
+      });
+      renderRoute(firstVisible.dataset.route);
+    }
+  }
+}
+
 function updateDashboard() {
   const overall = getOverallCompletion();
   const routeKey = localStorage.getItem(activeRouteKey) || "starter";
@@ -564,6 +612,28 @@ routeButtons.forEach((button) => {
   });
 });
 
+if (routeSearch) {
+  routeSearch.value = localStorage.getItem(routeQueryKey) || "";
+  routeSearch.addEventListener("input", () => {
+    localStorage.setItem(routeQueryKey, routeSearch.value);
+    applyRouteDiscovery();
+  });
+}
+
+if (routeFilters) {
+  const savedFilter = localStorage.getItem(routeFilterKey) || "all";
+  routeFilters.querySelectorAll(".filter-chip").forEach((chip) => {
+    chip.classList.toggle("active", chip.dataset.filter === savedFilter);
+    chip.addEventListener("click", () => {
+      routeFilters.querySelectorAll(".filter-chip").forEach((item) => {
+        item.classList.toggle("active", item === chip);
+      });
+      localStorage.setItem(routeFilterKey, chip.dataset.filter);
+      applyRouteDiscovery();
+    });
+  });
+}
+
 checkboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", saveChecklist);
 });
@@ -579,3 +649,4 @@ renderRoute("starter");
 loadChecklist();
 renderFavorites();
 updateDashboard();
+applyRouteDiscovery();

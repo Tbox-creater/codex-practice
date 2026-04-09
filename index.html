@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-page-title="首页">
   <div class="page-shell">
     <nav class="top-nav">
       <a class="brand-link" href="index.html">学习路线图</a>
@@ -18,8 +18,11 @@
         <a class="nav-link active" href="index.html">首页</a>
         <a class="nav-link" href="advanced.html">进阶路线</a>
         <a class="nav-link" href="systems.html">网络与应用技术</a>
+        <a class="nav-link" href="database.html">数据库专题</a>
+        <a class="nav-link" href="os.html">操作系统</a>
         <a class="nav-link" href="interview.html">面试专题</a>
       </div>
+      <button class="theme-toggle" id="theme-toggle" type="button">切换夜间</button>
     </nav>
     <header class="hero">
       <p class="eyebrow">Mobile Study Roadmap</p>
@@ -79,6 +82,29 @@
         </article>
       </section>
 
+      <section class="section dashboard-grid">
+        <article class="dashboard-card">
+          <p class="section-kicker">Search</p>
+          <h2>路线搜索与筛选</h2>
+          <div class="tool-stack">
+            <input class="search-input" id="route-search" type="search" placeholder="搜索路线、方向或关键词">
+            <div class="filter-chips" id="route-filters">
+              <button class="filter-chip active" data-filter="all" type="button">全部</button>
+              <button class="filter-chip" data-filter="frontend" type="button">前端</button>
+              <button class="filter-chip" data-filter="backend" type="button">后端</button>
+              <button class="filter-chip" data-filter="python" type="button">Python</button>
+              <button class="filter-chip" data-filter="habit" type="button">习惯养成</button>
+            </div>
+            <p class="dashboard-copy" id="search-status">先选一个筛选，或直接搜索你想学的方向。</p>
+          </div>
+        </article>
+        <article class="dashboard-card">
+          <p class="section-kicker">Recent</p>
+          <h2>最近学习</h2>
+          <div id="recent-panel" class="resume-panel"></div>
+        </article>
+      </section>
+
       <section class="section">
         <div class="section-heading">
           <p class="section-kicker">Special Pages</p>
@@ -96,6 +122,18 @@
             <h3>网络与应用技术</h3>
             <p>集中梳理 HTTP、TCP/IP、缓存、消息队列、鉴权、搜索、日志和监控，让底层认知与业务技术一起补齐。</p>
             <a class="button secondary small" href="systems.html">打开页面</a>
+          </article>
+          <article class="topic-card">
+            <p class="section-kicker">Database</p>
+            <h3>数据库专题</h3>
+            <p>补齐表设计、索引、事务、锁、SQL 优化、Redis 缓存与高频面试点，形成真正能落地的存储认知。</p>
+            <a class="button secondary small" href="database.html">打开页面</a>
+          </article>
+          <article class="topic-card">
+            <p class="section-kicker">Operating System</p>
+            <h3>操作系统专题</h3>
+            <p>理解进程线程、内存、文件 IO、并发、调度与系统调用，建立更扎实的底层思维。</p>
+            <a class="button secondary small" href="os.html">打开页面</a>
           </article>
           <article class="topic-card">
             <p class="section-kicker">Interview</p>
@@ -189,5 +227,6 @@
   </div>
 
   <script src="app.js"></script>
+  <script src="shared.js"></script>
 </body>
 </html>

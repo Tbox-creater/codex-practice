@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-page-title="面试专题">
   <div class="page-shell">
     <nav class="top-nav">
       <a class="brand-link" href="index.html">学习路线图</a>
@@ -18,8 +18,11 @@
         <a class="nav-link" href="index.html">首页</a>
         <a class="nav-link" href="advanced.html">进阶路线</a>
         <a class="nav-link" href="systems.html">网络与应用技术</a>
+        <a class="nav-link" href="database.html">数据库专题</a>
+        <a class="nav-link" href="os.html">操作系统</a>
         <a class="nav-link active" href="interview.html">面试专题</a>
       </div>
+      <button class="theme-toggle" id="theme-toggle" type="button">切换夜间</button>
     </nav>
 
     <header class="hero compact-hero">
@@ -71,6 +74,18 @@
           <article class="qa-card">
             <h3>算法</h3>
             <p>数组、哈希表、双指针、栈队列、树、DFS/BFS、二分、动态规划基础。</p>
+          </article>
+        </div>
+        <div class="content-grid two-col section-gap-top">
+          <article class="content-card">
+            <h3>数据库面试别只背术语</h3>
+            <p>如果索引、事务、锁这些点总答不扎实，直接去数据库专题做针对性补强会更有效。</p>
+            <a class="button secondary small" href="database.html">去数据库专题</a>
+          </article>
+          <article class="content-card">
+            <h3>系统题要靠底层理解撑住</h3>
+            <p>如果你在并发、线程、内存和 IO 这些点上总是卡住，操作系统专题会帮你补底。</p>
+            <a class="button secondary small" href="os.html">去操作系统专题</a>
           </article>
         </div>
       </section>
@@ -126,5 +141,6 @@
       </section>
     </main>
   </div>
+  <script src="shared.js"></script>
 </body>
 </html>

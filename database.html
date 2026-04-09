@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#13315c">
+  <title>数据库专题</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page-title="数据库专题">
+  <div class="page-shell">
+    <nav class="top-nav">
+      <a class="brand-link" href="index.html">学习路线图</a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">首页</a>
+        <a class="nav-link" href="advanced.html">进阶路线</a>
+        <a class="nav-link" href="systems.html">网络与应用技术</a>
+        <a class="nav-link active" href="database.html">数据库专题</a>
+        <a class="nav-link" href="os.html">操作系统</a>
+        <a class="nav-link" href="interview.html">面试专题</a>
+      </div>
+      <button class="theme-toggle" id="theme-toggle" type="button">切换夜间</button>
+    </nav>
+    <header class="hero compact-hero">
+      <p class="eyebrow">Database Topics</p>
+      <h1>数据库专题</h1>
+      <p class="hero-copy">从表设计、SQL、索引和事务开始，逐步走向缓存、分库分表和数据一致性，不再只会背名词。</p>
+    </header>
+    <main>
+      <section class="section">
+        <div class="section-heading"><p class="section-kicker">Core</p><h2>必须打牢的四块</h2></div>
+        <div class="content-grid two-col">
+          <article class="content-card"><h3>表设计</h3><ul><li>主键、外键、范式与反范式。</li><li>一对多、多对多与中间表。</li><li>时间字段、状态字段和审计字段设计。</li></ul></article>
+          <article class="content-card"><h3>SQL</h3><ul><li>增删改查、联表、聚合、分页。</li><li>子查询、视图、存储过程理解即可。</li><li>能把业务需求翻译成查询语句。</li></ul></article>
+          <article class="content-card"><h3>索引</h3><ul><li>B+ 树、联合索引、最左前缀。</li><li>回表、覆盖索引与索引失效。</li><li>慢查询排查与执行计划基础。</li></ul></article>
+          <article class="content-card"><h3>事务与锁</h3><ul><li>ACID、隔离级别、脏读与幻读。</li><li>行锁、表锁、乐观锁与悲观锁。</li><li>死锁与并发更新问题。</li></ul></article>
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-heading"><p class="section-kicker">Advanced</p><h2>进阶应用技术</h2></div>
+        <div class="timeline-grid">
+          <article class="timeline-card"><h3>Redis</h3><p>理解字符串、哈希、列表、集合、有序集合，以及缓存击穿和过期策略。</p></article>
+          <article class="timeline-card"><h3>读写分离</h3><p>理解主从复制、延迟、读一致性和典型适用场景。</p></article>
+          <article class="timeline-card"><h3>分库分表</h3><p>理解数据量增长后的拆分动机、路由方式和复杂性成本。</p></article>
+          <article class="timeline-card"><h3>一致性</h3><p>理解缓存与数据库双写、最终一致性和补偿思路。</p></article>
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-heading"><p class="section-kicker">Interview</p><h2>数据库高频面试点</h2></div>
+        <div class="qa-grid">
+          <article class="qa-card"><h3>为什么索引能加速查询？</h3><p>要讲数据结构、扫描范围缩小和回表成本，而不是只说“因为有目录”。</p></article>
+          <article class="qa-card"><h3>联合索引为什么要看最左前缀？</h3><p>要能结合索引排序结构和查询条件使用方式来解释。</p></article>
+          <article class="qa-card"><h3>事务隔离级别怎么选？</h3><p>要讲一致性要求、并发性能和业务风险，而不是只背四个级别名字。</p></article>
+          <article class="qa-card"><h3>Redis 和 MySQL 各自适合什么？</h3><p>要从持久化、查询能力、延迟和业务场景来回答。</p></article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="shared.js"></script>
+</body>
+</html>
