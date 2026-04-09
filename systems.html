@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#13315c">
+  <title>网络与应用技术</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="top-nav">
+      <a class="brand-link" href="index.html">学习路线图</a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">首页</a>
+        <a class="nav-link" href="advanced.html">进阶路线</a>
+        <a class="nav-link active" href="systems.html">网络与应用技术</a>
+        <a class="nav-link" href="interview.html">面试专题</a>
+      </div>
+    </nav>
+
+    <header class="hero compact-hero">
+      <p class="eyebrow">Networks And Applied Tech</p>
+      <h1>网络与应用技术</h1>
+      <p class="hero-copy">把网络层知识和常见业务技术拆开学，避免只会背协议名词，却不知道在实际项目里什么时候用。</p>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="section-heading">
+          <p class="section-kicker">Network</p>
+          <h2>网络层学习主线</h2>
+        </div>
+        <div class="content-grid two-col">
+          <article class="content-card">
+            <h3>HTTP / HTTPS</h3>
+            <ul>
+              <li>请求方法、状态码、幂等性、缓存控制。</li>
+              <li>Cookie、Session、Token 与跨域。</li>
+              <li>HTTPS 握手、证书、常见安全风险。</li>
+            </ul>
+          </article>
+          <article class="content-card">
+            <h3>TCP / IP</h3>
+            <ul>
+              <li>三次握手、四次挥手、流量控制、拥塞控制。</li>
+              <li>为什么会粘包、丢包、重传、超时。</li>
+              <li>DNS 解析与从域名到页面的完整链路。</li>
+            </ul>
+          </article>
+          <article class="content-card">
+            <h3>实时通信</h3>
+            <ul>
+              <li>轮询、长轮询、SSE、WebSocket 的区别。</li>
+              <li>什么时候选消息队列，什么时候直接推送。</li>
+              <li>聊天、通知、实时看板的常见实现思路。</li>
+            </ul>
+          </article>
+          <article class="content-card">
+            <h3>网关与鉴权</h3>
+            <ul>
+              <li>Nginx、反向代理、负载均衡和限流。</li>
+              <li>JWT、OAuth、单点登录的适用场景。</li>
+              <li>接口签名、重放攻击和权限边界。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="section-kicker">Applied Tech</p>
+          <h2>应用技术路线</h2>
+        </div>
+        <div class="timeline-grid">
+          <article class="timeline-card">
+            <h3>缓存</h3>
+            <p>理解浏览器缓存、CDN、Redis、本地缓存，以及缓存穿透、击穿、雪崩。</p>
+          </article>
+          <article class="timeline-card">
+            <h3>消息队列</h3>
+            <p>理解异步削峰、解耦、重试、顺序消费、幂等处理和死信队列。</p>
+          </article>
+          <article class="timeline-card">
+            <h3>搜索</h3>
+            <p>理解倒排索引、全文检索、分词、排序和推荐与搜索的边界。</p>
+          </article>
+          <article class="timeline-card">
+            <h3>日志与监控</h3>
+            <p>理解访问日志、应用日志、指标、链路追踪和告警，知道故障时先看什么。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="section-kicker">Questions</p>
+          <h2>你应该能回答的知识点</h2>
+        </div>
+        <div class="qa-grid">
+          <article class="qa-card">
+            <h3>为什么浏览器输入 URL 后会看到页面？</h3>
+            <p>至少要能讲清 DNS、TCP 连接、TLS、HTTP 请求、服务端处理、浏览器解析渲染这几段。</p>
+          </article>
+          <article class="qa-card">
+            <h3>为什么需要缓存，缓存会带来什么问题？</h3>
+            <p>要能讲性能收益，也要能讲一致性、失效策略和热点问题。</p>
+          </article>
+          <article class="qa-card">
+            <h3>为什么消息队列能削峰？</h3>
+            <p>要能把“请求高峰”和“消费速度”分开理解，而不是只会背定义。</p>
+          </article>
+          <article class="qa-card">
+            <h3>JWT 和 Session 的取舍是什么？</h3>
+            <p>要能从服务端状态、扩展性、安全性和主动失效来回答。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

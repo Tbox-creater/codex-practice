@@ -38,6 +38,45 @@ a {
   text-decoration: none;
 }
 
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  backdrop-filter: blur(16px);
+  background: rgba(255, 252, 245, 0.72);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.brand-link {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.nav-link {
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: var(--brand);
+  font-weight: 700;
+}
+
+.nav-link.active {
+  background: var(--brand);
+  color: #fff;
+}
+
 .page-shell {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
@@ -61,6 +100,10 @@ a {
   border-radius: var(--radius-xl);
   overflow: hidden;
   position: relative;
+}
+
+.compact-hero h1 {
+  max-width: none;
 }
 
 .hero::after {
@@ -178,17 +221,38 @@ main {
   gap: 10px;
 }
 
-.dashboard-grid,
-.favorites-panel {
+.topic-grid,
+.content-grid,
+.timeline-grid,
+.qa-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
 
+.topic-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.content-grid.two-col,
+.dashboard-grid,
+.favorites-panel {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.content-grid.three-col,
+.timeline-grid,
+.qa-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.topic-card,
 .dashboard-card,
 .favorite-card,
 .favorite-empty,
-.resume-card {
+.resume-card,
+.content-card,
+.timeline-card,
+.qa-card {
   padding: 20px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--line);
@@ -393,6 +457,17 @@ main {
   text-underline-offset: 3px;
 }
 
+.topic-card p,
+.content-card p,
+.timeline-card p,
+.qa-card p,
+.content-card li,
+.timeline-card li,
+.qa-card li {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .task-list {
   list-style: none;
   padding-left: 0;
@@ -483,12 +558,27 @@ input[type="checkbox"] {
   }
 
   .hero-stats,
+  .topic-grid,
   .dashboard-grid,
   .favorites-panel,
+  .content-grid.two-col,
+  .content-grid.three-col,
+  .timeline-grid,
+  .qa-grid,
   .framework-grid,
   .daily-layout,
   .resource-groups {
     grid-template-columns: 1fr;
+  }
+
+  .top-nav {
+    border-radius: 22px;
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .nav-links {
+    justify-content: start;
   }
 
   .progress-ring-card {
