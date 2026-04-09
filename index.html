@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#13315c">
+  <title>编程学习路线图</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">Mobile Study Roadmap</p>
+      <h1>编程学习技术总路线</h1>
+      <p class="hero-copy">
+        把零基础、前端、后端、Python 和每日计划整合成一个能在手机上反复查看、逐步执行的学习站。
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="#roadmaps">开始学习</a>
+        <a class="button secondary" href="#daily">看每日计划</a>
+      </div>
+      <div class="hero-stats">
+        <article>
+          <strong>5</strong>
+          <span>条完整路线</span>
+        </article>
+        <article>
+          <strong>12</strong>
+          <span>周可执行节奏</span>
+        </article>
+        <article>
+          <strong>1</strong>
+          <span>部手机即可复习</span>
+        </article>
+      </div>
+    </header>
+
+    <main>
+      <section class="section intro-card">
+        <div>
+          <p class="section-kicker">学习方法</p>
+          <h2>先做项目，再补概念</h2>
+        </div>
+        <p>
+          每一条路线都按“阶段目标、每周动作、交付项目、验收标准”来设计。你不需要一次学完所有技术，只要先选一条主线，把每天的动作做出来。
+        </p>
+      </section>
+
+      <section class="section" id="roadmaps">
+        <div class="section-heading">
+          <p class="section-kicker">Roadmaps</p>
+          <h2>选择你的主路线</h2>
+        </div>
+        <div class="chip-group" role="tablist" aria-label="学习路线">
+          <button class="route-chip active" data-route="starter" role="tab" aria-selected="true">零基础</button>
+          <button class="route-chip" data-route="frontend" role="tab" aria-selected="false">前端</button>
+          <button class="route-chip" data-route="backend" role="tab" aria-selected="false">后端</button>
+          <button class="route-chip" data-route="python" role="tab" aria-selected="false">Python</button>
+          <button class="route-chip" data-route="daily" role="tab" aria-selected="false">每日计划</button>
+        </div>
+        <div class="roadmap-panel" id="route-panel" aria-live="polite"></div>
+      </section>
+
+      <section class="section framework-grid">
+        <article class="framework-card">
+          <p class="section-kicker">阶段结构</p>
+          <h3>阶段 1</h3>
+          <p>学语言与基础语法，练会输入、输出、条件、循环、函数、数组和对象。</p>
+        </article>
+        <article class="framework-card">
+          <p class="section-kicker">阶段结构</p>
+          <h3>阶段 2</h3>
+          <p>做小项目，把 Git、调试、命令行和基础算法穿插进去，不让知识停留在记忆层。</p>
+        </article>
+        <article class="framework-card">
+          <p class="section-kicker">阶段结构</p>
+          <h3>阶段 3</h3>
+          <p>进入框架、数据库、接口和部署，开始做能上线、能分享、能复用的作品。</p>
+        </article>
+      </section>
+
+      <section class="section" id="daily">
+        <div class="section-heading">
+          <p class="section-kicker">Execution</p>
+          <h2>每天怎么学</h2>
+        </div>
+        <div class="daily-layout">
+          <article class="daily-card">
+            <h3>平日 90 分钟模板</h3>
+            <ul>
+              <li><strong>20 分钟</strong> 学新概念，只看今天真正要用到的内容。</li>
+              <li><strong>50 分钟</strong> 写代码或做练习，不跳步骤。</li>
+              <li><strong>20 分钟</strong> 复盘，总结一个 bug、一个知识点、一个明天任务。</li>
+            </ul>
+          </article>
+          <article class="daily-card">
+            <h3>周末 3 小时模板</h3>
+            <ul>
+              <li><strong>1 小时</strong> 完成本周项目功能。</li>
+              <li><strong>1 小时</strong> 查漏补缺，补看数据库、Git、接口或算法。</li>
+              <li><strong>1 小时</strong> 整理笔记并发布到 GitHub。</li>
+            </ul>
+          </article>
+        </div>
+        <div class="checklist-card">
+          <div class="checklist-header">
+            <div>
+              <p class="section-kicker">Checklist</p>
+              <h3>今日完成清单</h3>
+            </div>
+            <button class="button secondary small" id="reset-progress" type="button">重置打卡</button>
+          </div>
+          <label><input type="checkbox" data-check="study-1"> 今天完成 20 分钟概念学习</label>
+          <label><input type="checkbox" data-check="study-2"> 今天写了至少 30 行有效代码</label>
+          <label><input type="checkbox" data-check="study-3"> 今天记录了一个问题和解决办法</label>
+          <label><input type="checkbox" data-check="study-4"> 今天把下一步任务写清楚了</label>
+          <p class="hint">打卡记录会保存在当前浏览器，手机打开后也能继续使用。</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
