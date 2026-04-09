@@ -5,6 +5,24 @@ const routes = {
     duration: "12 周",
     focus: "Python + Git + SQL + Web 基础",
     output: "做出 3 个小项目 + 1 个完整练手项目",
+    resources: {
+      docs: [
+        { label: "Python 官方教程", url: "https://docs.python.org/3/tutorial/" },
+        { label: "GitHub 入门文档", url: "https://docs.github.com/en/get-started" },
+        { label: "MDN Learn Web Development", url: "https://developer.mozilla.org/en-US/docs/Learn" },
+        { label: "SQLite 5 分钟快速上手", url: "https://sqlite.org/quickstart.html" }
+      ],
+      videos: [
+        { label: "YouTube: freeCodeCamp Python 全课程搜索", url: "https://www.youtube.com/results?search_query=freeCodeCamp+Python+full+course" },
+        { label: "YouTube: freeCodeCamp HTML CSS 初学者课程搜索", url: "https://www.youtube.com/results?search_query=freeCodeCamp+HTML+CSS+full+course+beginners" },
+        { label: "YouTube: freeCodeCamp SQL 初学者课程搜索", url: "https://www.youtube.com/results?search_query=freeCodeCamp+SQL+tutorial+full+database+course+for+beginners" }
+      ],
+      repos: [
+        { label: "firstcontributions/first-contributions", url: "https://github.com/firstcontributions/first-contributions" },
+        { label: "florinpop17/app-ideas", url: "https://github.com/florinpop17/app-ideas" },
+        { label: "public-apis/public-apis", url: "https://github.com/public-apis/public-apis" }
+      ]
+    },
     phases: [
       {
         title: "第 1-3 周：语法与基本功",
@@ -50,6 +68,23 @@ const routes = {
     duration: "10-14 周",
     focus: "HTML + CSS + JavaScript + React",
     output: "完成响应式站点、组件项目和小型前端应用",
+    resources: {
+      docs: [
+        { label: "MDN Learn Web Development", url: "https://developer.mozilla.org/en-US/docs/Learn" },
+        { label: "React 官方 Learn", url: "https://react.dev/learn" },
+        { label: "MDN JavaScript 入门", url: "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript" }
+      ],
+      videos: [
+        { label: "YouTube: freeCodeCamp HTML CSS 全课程搜索", url: "https://www.youtube.com/results?search_query=freeCodeCamp+learn+HTML+CSS+full+course+for+beginners" },
+        { label: "YouTube: freeCodeCamp JavaScript 全课程搜索", url: "https://www.youtube.com/results?search_query=freeCodeCamp+learn+JavaScript+full+course+for+beginners" },
+        { label: "YouTube: freeCodeCamp React 全课程搜索", url: "https://www.youtube.com/results?search_query=freeCodeCamp+React+full+course+for+beginners" }
+      ],
+      repos: [
+        { label: "wesbos/JavaScript30", url: "https://github.com/wesbos/JavaScript30" },
+        { label: "practical-tutorials/project-based-learning", url: "https://github.com/practical-tutorials/project-based-learning" },
+        { label: "florinpop17/app-ideas", url: "https://github.com/florinpop17/app-ideas" }
+      ]
+    },
     phases: [
       {
         title: "阶段 1：页面基础",
@@ -95,6 +130,23 @@ const routes = {
     duration: "12-16 周",
     focus: "后端语言 + SQL + API + 部署",
     output: "完成用户系统、接口服务和可部署项目",
+    resources: {
+      docs: [
+        { label: "FastAPI 官方教程", url: "https://fastapi.tiangolo.com/tutorial/" },
+        { label: "PostgreSQL 官方 Tutorial", url: "https://www.postgresql.org/docs/current/tutorial.html" },
+        { label: "GitHub Using Git 文档", url: "https://docs.github.com/categories/using-git" }
+      ],
+      videos: [
+        { label: "YouTube: freeCodeCamp FastAPI 搜索", url: "https://www.youtube.com/results?search_query=freeCodeCamp+FastAPI+course" },
+        { label: "YouTube: freeCodeCamp Node.js 全课程搜索", url: "https://www.youtube.com/results?search_query=freeCodeCamp+Node.js+full+course+beginners" },
+        { label: "YouTube: freeCodeCamp SQL 全课程搜索", url: "https://www.youtube.com/results?search_query=freeCodeCamp+SQL+tutorial+full+database+course+for+beginners" }
+      ],
+      repos: [
+        { label: "fastapi/full-stack-fastapi-template", url: "https://github.com/fastapi/full-stack-fastapi-template" },
+        { label: "public-apis/public-apis", url: "https://github.com/public-apis/public-apis" },
+        { label: "practical-tutorials/project-based-learning", url: "https://github.com/practical-tutorials/project-based-learning" }
+      ]
+    },
     phases: [
       {
         title: "阶段 1：语言与网络基础",
@@ -140,6 +192,23 @@ const routes = {
     duration: "10-12 周",
     focus: "Python 基础 + 项目 + 自动化 + Web",
     output: "完成脚本工具、数据处理练习和基础 Web 项目",
+    resources: {
+      docs: [
+        { label: "Python 官方教程", url: "https://docs.python.org/3/tutorial/" },
+        { label: "FastAPI First Steps", url: "https://fastapi.tiangolo.com/tutorial/first-steps/" },
+        { label: "SQLite Documentation", url: "https://sqlite.org/docs.html" }
+      ],
+      videos: [
+        { label: "YouTube: freeCodeCamp Python 初学者全课程搜索", url: "https://www.youtube.com/results?search_query=freeCodeCamp+Python+for+Beginners+full+course" },
+        { label: "YouTube: freeCodeCamp Pandas 搜索", url: "https://www.youtube.com/results?search_query=freeCodeCamp+pandas+course" },
+        { label: "YouTube: freeCodeCamp API with Python 搜索", url: "https://www.youtube.com/results?search_query=freeCodeCamp+API+Python+course" }
+      ],
+      repos: [
+        { label: "vinta/awesome-python", url: "https://github.com/vinta/awesome-python" },
+        { label: "public-apis/public-apis", url: "https://github.com/public-apis/public-apis" },
+        { label: "practical-tutorials/project-based-learning", url: "https://github.com/practical-tutorials/project-based-learning" }
+      ]
+    },
     phases: [
       {
         title: "阶段 1：核心语法",
@@ -185,6 +254,23 @@ const routes = {
     duration: "30 天起步",
     focus: "每日节奏 + 小步快跑 + 项目复盘",
     output: "形成稳定学习习惯和第一批作品",
+    resources: {
+      docs: [
+        { label: "GitHub Hello World", url: "https://docs.github.com/en/get-started/start-your-journey/hello-world" },
+        { label: "GitHub Desktop 入门", url: "https://docs.github.com/desktop/guides/getting-started?platform=windows" },
+        { label: "MDN Web Tutorials", url: "https://developer.mozilla.org/en-US/docs/Web/Tutorials" }
+      ],
+      videos: [
+        { label: "YouTube: freeCodeCamp Full Stack for Beginners 搜索", url: "https://www.youtube.com/results?search_query=freeCodeCamp+full+stack+web+development+for+beginners" },
+        { label: "YouTube: 每日 30-90 分钟编程学习搜索", url: "https://www.youtube.com/results?search_query=programming+study+routine+for+beginners" },
+        { label: "YouTube: GitHub 初学者搜索", url: "https://www.youtube.com/results?search_query=GitHub+for+beginners+freeCodeCamp" }
+      ],
+      repos: [
+        { label: "firstcontributions/first-contributions", url: "https://github.com/firstcontributions/first-contributions" },
+        { label: "practical-tutorials/project-based-learning", url: "https://github.com/practical-tutorials/project-based-learning" },
+        { label: "build-your-own-x", url: "https://build-your-own-x.com/" }
+      ]
+    },
     phases: [
       {
         title: "每天固定动作",
@@ -246,6 +332,29 @@ function renderRoute(routeKey) {
             </ul>
           </section>
         `).join("")}
+      </div>
+      <div class="resource-groups">
+        <section class="resource-card">
+          <p class="section-kicker">Docs</p>
+          <h4>官方文档</h4>
+          <ul class="resource-list">
+            ${route.resources.docs.map((item) => `<li><a href="${item.url}" target="_blank" rel="noreferrer">${item.label}</a></li>`).join("")}
+          </ul>
+        </section>
+        <section class="resource-card">
+          <p class="section-kicker">Videos</p>
+          <h4>YouTube 学习入口</h4>
+          <ul class="resource-list">
+            ${route.resources.videos.map((item) => `<li><a href="${item.url}" target="_blank" rel="noreferrer">${item.label}</a></li>`).join("")}
+          </ul>
+        </section>
+        <section class="resource-card">
+          <p class="section-kicker">Repos</p>
+          <h4>项目仓库</h4>
+          <ul class="resource-list">
+            ${route.resources.repos.map((item) => `<li><a href="${item.url}" target="_blank" rel="noreferrer">${item.label}</a></li>`).join("")}
+          </ul>
+        </section>
       </div>
     </article>
   `;
