@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#13315c">
+  <title>软件测试专题</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page-title="软件测试专题">
+  <div class="page-shell">
+    <nav class="top-nav">
+      <a class="brand-link" href="index.html">学习路线图</a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">首页</a>
+        <a class="nav-link" href="advanced.html">进阶路线</a>
+        <a class="nav-link" href="systems.html">网络与应用技术</a>
+        <a class="nav-link" href="database.html">数据库专题</a>
+        <a class="nav-link" href="os.html">操作系统</a>
+        <a class="nav-link active" href="testing.html">软件测试</a>
+        <a class="nav-link" href="interview.html">面试专题</a>
+      </div>
+      <button class="theme-toggle" id="theme-toggle" type="button">切换夜间</button>
+    </nav>
+
+    <header class="hero compact-hero">
+      <p class="eyebrow">Software Testing</p>
+      <h1>软件测试专题</h1>
+      <p class="hero-copy">把测试从“会写几个断言”升级成完整工程能力：单元测试、集成测试、接口测试、自动化、性能、CI 和测试思维。</p>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="section-heading">
+          <p class="section-kicker">Roadmap</p>
+          <h2>测试学习路线</h2>
+        </div>
+        <div class="timeline-grid">
+          <article class="timeline-card">
+            <h3>阶段 1</h3>
+            <p>理解测试金字塔、测试左移、冒烟测试、回归测试，先建立测试分类认知。</p>
+          </article>
+          <article class="timeline-card">
+            <h3>阶段 2</h3>
+            <p>掌握单元测试与 Mock，学会写可维护的测试用例，而不是只覆盖 happy path。</p>
+          </article>
+          <article class="timeline-card">
+            <h3>阶段 3</h3>
+            <p>进入接口测试、集成测试和 UI 自动化，理解测试环境、数据准备和稳定性问题。</p>
+          </article>
+          <article class="timeline-card">
+            <h3>阶段 4</h3>
+            <p>补齐性能测试、CI 集成、测试报告和缺陷复盘，让测试真正进入交付流程。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="section-kicker">Tooling</p>
+          <h2>常见测试技术栈</h2>
+        </div>
+        <div class="content-grid three-col">
+          <article class="content-card">
+            <h3>前端测试</h3>
+            <p>Vitest、Jest、Testing Library、Playwright、Cypress。</p>
+          </article>
+          <article class="content-card">
+            <h3>后端测试</h3>
+            <p>Pytest、JUnit、Supertest、Postman/Newman、Apifox。</p>
+          </article>
+          <article class="content-card">
+            <h3>性能与质量</h3>
+            <p>k6、JMeter、Lighthouse、SonarQube、GitHub Actions。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="section-kicker">Interview</p>
+          <h2>测试面试经验与知识点</h2>
+        </div>
+        <div class="qa-grid">
+          <article class="qa-card">
+            <h3>为什么不能只写单元测试？</h3>
+            <p>要能讲边界、系统联动、真实环境差异，以及不同层级测试覆盖的目标不同。</p>
+          </article>
+          <article class="qa-card">
+            <h3>自动化测试为什么容易不稳定？</h3>
+            <p>常见原因包括环境不一致、数据污染、等待策略错误、依赖外部服务过多。</p>
+          </article>
+          <article class="qa-card">
+            <h3>如何设计一个测试方案？</h3>
+            <p>从业务风险、核心链路、异常场景、兼容性、性能和发布节奏出发讲会更专业。</p>
+          </article>
+          <article class="qa-card">
+            <h3>怎么和开发协作推动质量提升？</h3>
+            <p>重点不是“帮忙点点点”，而是通过测试前移、规范、自动化和复盘降低返工。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="section-kicker">Experience</p>
+          <h2>面试表达建议</h2>
+        </div>
+        <div class="content-grid two-col">
+          <article class="content-card">
+            <h3>讲项目时</h3>
+            <ul>
+              <li>不要只说“写了多少用例”，要说降低了什么风险。</li>
+              <li>讲清你如何选测试层级和为什么这样选。</li>
+              <li>最好准备一个线上问题复盘案例。</li>
+            </ul>
+          </article>
+          <article class="content-card">
+            <h3>讲质量价值时</h3>
+            <ul>
+              <li>强调回归效率、缺陷提前发现、发布稳定性提升。</li>
+              <li>如果做过自动化或性能测试，要给出前后对比结果。</li>
+              <li>能讲“质量治理”会明显比只讲脚本更强。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="shared.js"></script>
+</body>
+</html>

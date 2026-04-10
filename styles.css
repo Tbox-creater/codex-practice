@@ -282,7 +282,8 @@ main {
 .resume-card,
 .content-card,
 .timeline-card,
-.qa-card {
+.qa-card,
+.learning-react-app .roadmap-card {
   padding: 20px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--line);
@@ -331,6 +332,10 @@ main {
 
 .dashboard-copy + .dashboard-copy {
   margin-top: 10px;
+}
+
+.section-gap-top {
+  margin-top: 16px;
 }
 
 .tool-stack {

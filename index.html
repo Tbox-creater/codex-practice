@@ -20,6 +20,7 @@
         <a class="nav-link" href="systems.html">网络与应用技术</a>
         <a class="nav-link" href="database.html">数据库专题</a>
         <a class="nav-link" href="os.html">操作系统</a>
+        <a class="nav-link" href="testing.html">软件测试</a>
         <a class="nav-link" href="interview.html">面试专题</a>
       </div>
       <button class="theme-toggle" id="theme-toggle" type="button">切换夜间</button>
@@ -61,48 +62,16 @@
         </p>
       </section>
 
-      <section class="section dashboard-grid">
-        <article class="dashboard-card">
-          <p class="section-kicker">Progress</p>
-          <h2>学习进度面板</h2>
-          <div class="progress-ring-card">
-            <div class="progress-ring" id="overall-progress-ring">
-              <strong id="overall-progress-value">0%</strong>
-            </div>
-            <div>
-              <p class="dashboard-copy">这里会汇总你在所有路线里的任务完成度，方便你快速判断最近是在积累，还是只在收藏。</p>
-              <p class="dashboard-copy" id="overall-progress-note">先选一条路线开始勾选任务。</p>
-            </div>
-          </div>
-        </article>
-        <article class="dashboard-card">
-          <p class="section-kicker">Resume</p>
-          <h2>继续学习</h2>
-          <div id="resume-panel" class="resume-panel"></div>
-        </article>
+      <section class="section">
+        <div id="learning-app-root"></div>
       </section>
 
-      <section class="section dashboard-grid">
-        <article class="dashboard-card">
-          <p class="section-kicker">Search</p>
-          <h2>路线搜索与筛选</h2>
-          <div class="tool-stack">
-            <input class="search-input" id="route-search" type="search" placeholder="搜索路线、方向或关键词">
-            <div class="filter-chips" id="route-filters">
-              <button class="filter-chip active" data-filter="all" type="button">全部</button>
-              <button class="filter-chip" data-filter="frontend" type="button">前端</button>
-              <button class="filter-chip" data-filter="backend" type="button">后端</button>
-              <button class="filter-chip" data-filter="python" type="button">Python</button>
-              <button class="filter-chip" data-filter="habit" type="button">习惯养成</button>
-            </div>
-            <p class="dashboard-copy" id="search-status">先选一个筛选，或直接搜索你想学的方向。</p>
-          </div>
-        </article>
-        <article class="dashboard-card">
+      <section class="section">
+        <div class="section-heading">
           <p class="section-kicker">Recent</p>
           <h2>最近学习</h2>
-          <div id="recent-panel" class="resume-panel"></div>
-        </article>
+        </div>
+        <div id="recent-panel" class="favorites-panel"></div>
       </section>
 
       <section class="section">
@@ -136,35 +105,18 @@
             <a class="button secondary small" href="os.html">打开页面</a>
           </article>
           <article class="topic-card">
+            <p class="section-kicker">Testing</p>
+            <h3>软件测试专题</h3>
+            <p>补齐单元测试、集成测试、接口测试、UI 自动化、性能测试、测试左移与测试面试表达。</p>
+            <a class="button secondary small" href="testing.html">打开页面</a>
+          </article>
+          <article class="topic-card">
             <p class="section-kicker">Interview</p>
             <h3>面试专题</h3>
             <p>整理自我介绍、项目讲解、八股知识、算法准备和复盘方法，让学习内容更容易转换成面试表达。</p>
             <a class="button secondary small" href="interview.html">打开页面</a>
           </article>
         </div>
-      </section>
-
-      <section class="section" id="roadmaps">
-        <div class="section-heading">
-          <p class="section-kicker">Roadmaps</p>
-          <h2>选择你的主路线</h2>
-        </div>
-        <div class="chip-group" role="tablist" aria-label="学习路线">
-          <button class="route-chip active" data-route="starter" role="tab" aria-selected="true">零基础</button>
-          <button class="route-chip" data-route="frontend" role="tab" aria-selected="false">前端</button>
-          <button class="route-chip" data-route="backend" role="tab" aria-selected="false">后端</button>
-          <button class="route-chip" data-route="python" role="tab" aria-selected="false">Python</button>
-          <button class="route-chip" data-route="daily" role="tab" aria-selected="false">每日计划</button>
-        </div>
-        <div class="roadmap-panel" id="route-panel" aria-live="polite"></div>
-      </section>
-
-      <section class="section">
-        <div class="section-heading">
-          <p class="section-kicker">Favorites</p>
-          <h2>已收藏资源</h2>
-        </div>
-        <div id="favorites-panel" class="favorites-panel"></div>
       </section>
 
       <section class="section framework-grid">
@@ -226,7 +178,11 @@
     </main>
   </div>
 
-  <script src="app.js"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/htm@3.1.1/dist/htm.umd.js"></script>
+  <script src="routes-data.js"></script>
+  <script src="app-react.js"></script>
   <script src="shared.js"></script>
 </body>
 </html>
