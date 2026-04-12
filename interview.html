@@ -1,156 +1,80 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#13315c">
   <title>面试专题</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body data-page-title="面试专题">
-  <div class="page-shell">
-    <nav class="top-nav">
-      <a class="brand-link" href="index.html">学习路线图</a>
-      <div class="nav-links">
-        <a class="nav-link" href="index.html">首页</a>
-        <a class="nav-link" href="advanced.html">进阶路线</a>
-        <a class="nav-link" href="systems.html">网络与应用技术</a>
-        <a class="nav-link" href="database.html">数据库专题</a>
-        <a class="nav-link" href="os.html">操作系统</a>
-        <a class="nav-link" href="testing.html">软件测试</a>
-        <a class="nav-link active" href="interview.html">面试专题</a>
-      </div>
-      <button class="theme-toggle" id="theme-toggle" type="button">切换夜间</button>
-    </nav>
-
-    <header class="hero compact-hero">
-      <p class="eyebrow">Interview Prep</p>
-      <h1>面试专题</h1>
-      <p class="hero-copy">技术面试不是纯背题，更像“如何用项目和知识证明你能解决问题”。这一页把准备过程拆成可执行模块。</p>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">学习路线图</a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="index.html">首页</a>
+        <a href="advanced.html">进阶路线</a>
+        <a href="systems.html">网络与应用</a>
+        <a class="is-active" href="interview.html">面试专题</a>
+      </nav>
     </header>
 
     <main>
-      <section class="section">
-        <div class="section-heading">
-          <p class="section-kicker">Stories</p>
-          <h2>先准备这三段表达</h2>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Interview</p>
+          <h1>把学过的东西，变成你能讲清楚的能力。</h1>
+          <p>面试准备不应该等到最后一天。这一页只保留最常复用的表达模板和高频知识点，适合反复翻看。</p>
         </div>
-        <div class="content-grid three-col">
-          <article class="content-card">
+        <div class="hero-panel">
+          <p class="panel-title">准备顺序</p>
+          <ul class="plain-list">
+            <li>先讲清自己的项目。</li>
+            <li>再补知识点和常见场景题。</li>
+            <li>最后做模拟表达和复盘。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="card-grid two-up">
+          <article class="question-card">
             <h3>自我介绍</h3>
-            <p>控制在 1 分钟左右，讲背景、当前方向、做过的项目和正在补的能力。</p>
-          </article>
-          <article class="content-card">
-            <h3>项目讲解</h3>
-            <p>按“背景、目标、架构、难点、结果、复盘”来讲，不要只描述页面功能。</p>
-          </article>
-          <article class="content-card">
-            <h3>问题复盘</h3>
-            <p>准备 2 到 3 个你自己解决过的 Bug、性能问题或协作问题，突出思考过程。</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-heading">
-          <p class="section-kicker">Knowledge</p>
-          <h2>常见面试知识点</h2>
-        </div>
-        <div class="qa-grid">
-          <article class="qa-card">
-            <h3>前端</h3>
-            <p>盒模型、BFC、事件循环、闭包、原型链、虚拟 DOM、状态管理、性能优化。</p>
-          </article>
-          <article class="qa-card">
-            <h3>后端</h3>
-            <p>HTTP、数据库索引、事务、锁、缓存、鉴权、接口幂等、消息队列。</p>
-          </article>
-          <article class="qa-card">
-            <h3>通用工程</h3>
-            <p>Git 工作流、测试、CI/CD、日志监控、部署流程、故障定位和回滚思路。</p>
-          </article>
-          <article class="qa-card">
-            <h3>算法</h3>
-            <p>数组、哈希表、双指针、栈队列、树、DFS/BFS、二分、动态规划基础。</p>
-          </article>
-          <article class="qa-card">
-            <h3>软件测试</h3>
-            <p>测试金字塔、单元测试、集成测试、Mock、接口测试、自动化稳定性、质量左移。</p>
-          </article>
-        </div>
-        <div class="content-grid two-col section-gap-top">
-          <article class="content-card">
-            <h3>数据库面试别只背术语</h3>
-            <p>如果索引、事务、锁这些点总答不扎实，直接去数据库专题做针对性补强会更有效。</p>
-            <a class="button secondary small" href="database.html">去数据库专题</a>
-          </article>
-          <article class="content-card">
-            <h3>系统题要靠底层理解撑住</h3>
-            <p>如果你在并发、线程、内存和 IO 这些点上总是卡住，操作系统专题会帮你补底。</p>
-            <a class="button secondary small" href="os.html">去操作系统专题</a>
-          </article>
-          <article class="content-card">
-            <h3>测试岗或质量方向面试</h3>
-            <p>如果你准备测试开发、质量工程或自动化测试岗位，软件测试专题会更适合做针对性准备。</p>
-            <a class="button secondary small" href="testing.html">去软件测试专题</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-heading">
-          <p class="section-kicker">Experience</p>
-          <h2>面试经验与实战建议</h2>
-        </div>
-        <div class="timeline-grid">
-          <article class="timeline-card">
-            <h3>经验 1</h3>
-            <p>不会的问题不要硬编。先说自己目前理解到了哪一层，再给出可能方向。</p>
-          </article>
-          <article class="timeline-card">
-            <h3>经验 2</h3>
-            <p>项目题最能拉开差距。比起“做过登录”，更重要的是“为什么这么设计”。</p>
-          </article>
-          <article class="timeline-card">
-            <h3>经验 3</h3>
-            <p>准备自己的复盘文档。每次面试后记下不会的问题、答得差的项目点和表达卡顿处。</p>
-          </article>
-          <article class="timeline-card">
-            <h3>经验 4</h3>
-            <p>模拟面试时尽量大声说出来。很多人不是不会，而是无法在 2 分钟内讲清楚。</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-heading">
-          <p class="section-kicker">Checklist</p>
-          <h2>投递前检查</h2>
-        </div>
-        <div class="content-grid two-col">
-          <article class="content-card">
-            <h3>简历</h3>
-            <ul>
-              <li>每个项目都能一句话说清业务价值。</li>
-              <li>至少有一个项目写清技术难点和结果。</li>
-              <li>不要堆技术栈名词，要写解决了什么问题。</li>
+            <ul class="plain-list">
+              <li>你是谁，当前学习或工作状态是什么。</li>
+              <li>你主要做过哪些方向的项目。</li>
+              <li>你现在希望继续深入什么技术路线。</li>
             </ul>
           </article>
-          <article class="content-card">
-            <h3>面试准备</h3>
-            <ul>
-              <li>准备 30 秒、1 分钟、3 分钟三个版本的自我介绍。</li>
-              <li>准备 2 个最强项目和 1 个失败或踩坑案例。</li>
-              <li>准备反问问题，例如团队协作、技术栈和成长路径。</li>
+          <article class="question-card">
+            <h3>项目讲解</h3>
+            <ul class="plain-list">
+              <li>背景：为什么做这个项目。</li>
+              <li>方案：你负责了什么，怎么设计。</li>
+              <li>结果：做成了什么，遇到什么问题，如何优化。</li>
+            </ul>
+          </article>
+          <article class="question-card">
+            <h3>高频知识点</h3>
+            <ul class="plain-list">
+              <li>前端：闭包、事件循环、组件通信、性能优化。</li>
+              <li>后端：HTTP、数据库索引、事务、缓存、鉴权。</li>
+              <li>测试：测试点设计、接口测试、缺陷定位和复盘。</li>
+            </ul>
+          </article>
+          <article class="question-card">
+            <h3>面试经验</h3>
+            <ul class="plain-list">
+              <li>答题先给结论，再展开场景和例子。</li>
+              <li>不会的题尽量说出你会怎么排查，而不是只说不会。</li>
+              <li>面完立刻复盘，把不会的问题补回学习路线里。</li>
             </ul>
           </article>
         </div>
       </section>
     </main>
   </div>
-  <script src="shared.js"></script>
 </body>
 </html>

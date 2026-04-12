@@ -1,15 +1,4 @@
-﻿const http = require("node:http");
-const fs = require("node:fs/promises");
-const path = require("node:path");
-const { extname, join, normalize } = path;
-
-const PORT = Number(process.env.PORT) || 3000;
-const HOST = process.env.HOST || "0.0.0.0";
-const APP_ENV = process.env.APP_ENV || "production";
-const API_BASE_URL = process.env.API_BASE_URL || "/api";
-const PUBLIC_DIR = __dirname;
-
-const roadmaps = {
+﻿const fallbackRoadmaps = {
   starter: {
     name: "零基础路线",
     duration: "12 周",
@@ -197,71 +186,88 @@ const roadmaps = {
   }
 };
 
-const contentTypes = {
-  ".html": "text/html; charset=utf-8",
-  ".css": "text/css; charset=utf-8",
-  ".js": "text/javascript; charset=utf-8",
-  ".json": "application/json; charset=utf-8",
-  ".png": "image/png",
-  ".jpg": "image/jpeg",
-  ".jpeg": "image/jpeg",
-  ".svg": "image/svg+xml",
-  ".ico": "image/x-icon"
-};
+const routePanel = document.getElementById("route-panel");
+const chips = Array.from(document.querySelectorAll(".route-chip"));
 
-function sendJson(response, statusCode, payload) {
-  response.writeHead(statusCode, {
-    "Content-Type": "application/json; charset=utf-8",
-    "Cache-Control": "no-store"
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function renderRoute(routeKey, roadmaps) {
+  const route = roadmaps[routeKey] || roadmaps.starter;
+  routePanel.innerHTML = `
+    <article class="route-card">
+      <div class="route-summary">
+        <div>
+          <p class="eyebrow">${escapeHtml(route.duration)}</p>
+          <h3>${escapeHtml(route.name)}</h3>
+        </div>
+        <p>${escapeHtml(route.summary)}</p>
+        <div class="meta-row">
+          <span class="meta-pill">重点：${escapeHtml(route.focus)}</span>
+        </div>
+      </div>
+      <div class="card-grid three-up phase-grid">
+        ${route.phases.map((phase) => `
+          <section class="phase-card">
+            <h4>${escapeHtml(phase.title)}</h4>
+            <ul class="plain-list">
+              ${phase.points.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}
+            </ul>
+          </section>
+        `).join("")}
+      </div>
+      <section class="resource-card">
+        <h4>推荐资源</h4>
+        <ul class="link-list">
+          ${route.resources.map((item) => `
+            <li><a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.label)}</a></li>
+          `).join("")}
+        </ul>
+      </section>
+    </article>
+  `;
+}
+
+function setActiveChip(button) {
+  chips.forEach((chip) => {
+    const active = chip === button;
+    chip.classList.toggle("is-active", active);
+    chip.setAttribute("aria-selected", String(active));
   });
-  response.end(JSON.stringify(payload));
 }
 
-async function serveFile(response, requestPath) {
-  const normalized = normalize(requestPath === "/" ? "/index.html" : requestPath).replace(/^([.][.][/\\])+/, "");
-  const filePath = join(PUBLIC_DIR, normalized);
-  const extension = extname(filePath).toLowerCase();
-  const contentType = contentTypes[extension] || "application/octet-stream";
-  const file = await fs.readFile(filePath);
-  response.writeHead(200, { "Content-Type": contentType });
-  response.end(file);
-}
-
-const server = http.createServer(async (request, response) => {
-  const url = new URL(request.url, `http://${request.headers.host || "localhost"}`);
-
-  if (url.pathname === "/api/health") {
-    sendJson(response, 200, { ok: true, service: "study-roadmap-site" });
-    return;
-  }
-
-  if (url.pathname === "/api/site") {
-    sendJson(response, 200, {
-      appName: "编程学习路线图",
-      env: APP_ENV,
-      apiBaseUrl: API_BASE_URL,
-      hostingReady: true
-    });
-    return;
-  }
-
-  if (url.pathname === "/api/roadmaps") {
-    sendJson(response, 200, { roadmaps });
-    return;
-  }
-
+async function loadRoadmaps() {
   try {
-    await serveFile(response, url.pathname);
-  } catch (error) {
-    if (error && error.code === "ENOENT") {
-      sendJson(response, 404, { ok: false, message: "Not Found" });
-      return;
+    const response = await fetch("/api/roadmaps", {
+      headers: { Accept: "application/json" }
+    });
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
     }
-
-    sendJson(response, 500, { ok: false, message: "Internal Server Error" });
+    const payload = await response.json();
+    return payload.roadmaps || fallbackRoadmaps;
+  } catch (error) {
+    return fallbackRoadmaps;
   }
-});
+}
 
-server.listen(PORT, HOST, () => {
-  console.log(`Study roadmap site is running at http://${HOST}:${PORT}`);
-});
+async function bootstrap() {
+  const roadmaps = await loadRoadmaps();
+  const initial = chips[0];
+  renderRoute(initial.dataset.route, roadmaps);
+
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      setActiveChip(chip);
+      renderRoute(chip.dataset.route, roadmaps);
+    });
+  });
+}
+
+bootstrap();

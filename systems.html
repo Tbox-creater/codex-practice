@@ -1,142 +1,80 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#13315c">
   <title>网络与应用技术</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body data-page-title="网络与应用技术">
-  <div class="page-shell">
-    <nav class="top-nav">
-      <a class="brand-link" href="index.html">学习路线图</a>
-      <div class="nav-links">
-        <a class="nav-link" href="index.html">首页</a>
-        <a class="nav-link" href="advanced.html">进阶路线</a>
-        <a class="nav-link active" href="systems.html">网络与应用技术</a>
-        <a class="nav-link" href="database.html">数据库专题</a>
-        <a class="nav-link" href="os.html">操作系统</a>
-        <a class="nav-link" href="testing.html">软件测试</a>
-        <a class="nav-link" href="interview.html">面试专题</a>
-      </div>
-      <button class="theme-toggle" id="theme-toggle" type="button">切换夜间</button>
-    </nav>
-
-    <header class="hero compact-hero">
-      <p class="eyebrow">Networks And Applied Tech</p>
-      <h1>网络与应用技术</h1>
-      <p class="hero-copy">把网络层知识和常见业务技术拆开学，避免只会背协议名词，却不知道在实际项目里什么时候用。</p>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">学习路线图</a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="index.html">首页</a>
+        <a href="advanced.html">进阶路线</a>
+        <a class="is-active" href="systems.html">网络与应用</a>
+        <a href="interview.html">面试专题</a>
+      </nav>
     </header>
 
     <main>
-      <section class="section">
-        <div class="section-heading">
-          <p class="section-kicker">Network</p>
-          <h2>网络层学习主线</h2>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Systems</p>
+          <h1>把网络基础和常见应用技术连起来学。</h1>
+          <p>这一页聚焦最常用的系统知识，不追求面面俱到，只覆盖开发中最容易遇到、也最值得反复复习的主题。</p>
         </div>
-        <div class="content-grid two-col">
-          <article class="content-card">
+        <div class="hero-panel">
+          <p class="panel-title">优先顺序</p>
+          <ul class="plain-list">
+            <li>先学 HTTP 和请求链路。</li>
+            <li>再补 TCP/IP、DNS、HTTPS。</li>
+            <li>最后进入缓存、消息队列、监控这些应用层能力。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="card-grid two-up">
+          <article class="page-card">
             <h3>HTTP / HTTPS</h3>
-            <ul>
-              <li>请求方法、状态码、幂等性、缓存控制。</li>
-              <li>Cookie、Session、Token 与跨域。</li>
-              <li>HTTPS 握手、证书、常见安全风险。</li>
+            <ul class="plain-list">
+              <li>请求方法、状态码、Header、Cookie、Session。</li>
+              <li>HTTPS 做了什么，证书和加密解决了什么问题。</li>
+              <li>开发里最常见的跨域、鉴权和缓存头问题。</li>
             </ul>
           </article>
-          <article class="content-card">
-            <h3>TCP / IP</h3>
-            <ul>
-              <li>三次握手、四次挥手、流量控制、拥塞控制。</li>
-              <li>为什么会粘包、丢包、重传、超时。</li>
-              <li>DNS 解析与从域名到页面的完整链路。</li>
+          <article class="page-card">
+            <h3>TCP/IP / DNS</h3>
+            <ul class="plain-list">
+              <li>知道网络分层，不必一开始死磕全部细节。</li>
+              <li>理解域名解析、连接建立、数据传输的大致过程。</li>
+              <li>能够把“接口慢”“连不上”“超时”这类问题和网络链路联系起来。</li>
             </ul>
           </article>
-          <article class="content-card">
-            <h3>实时通信</h3>
-            <ul>
-              <li>轮询、长轮询、SSE、WebSocket 的区别。</li>
-              <li>什么时候选消息队列，什么时候直接推送。</li>
-              <li>聊天、通知、实时看板的常见实现思路。</li>
+          <article class="page-card">
+            <h3>缓存与消息队列</h3>
+            <ul class="plain-list">
+              <li>缓存适合解决读多写少、热点数据和响应速度问题。</li>
+              <li>消息队列适合削峰、解耦和异步处理。</li>
+              <li>学习时先理解场景，再记技术名词。</li>
             </ul>
           </article>
-          <article class="content-card">
-            <h3>网关与鉴权</h3>
-            <ul>
-              <li>Nginx、反向代理、负载均衡和限流。</li>
-              <li>JWT、OAuth、单点登录的适用场景。</li>
-              <li>接口签名、重放攻击和权限边界。</li>
+          <article class="page-card">
+            <h3>监控与日志</h3>
+            <ul class="plain-list">
+              <li>会看应用日志、访问日志和错误栈。</li>
+              <li>知道监控最少要看可用性、耗时和错误率。</li>
+              <li>线上排错时先定位范围，再下结论。</li>
             </ul>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-heading">
-          <p class="section-kicker">Applied Tech</p>
-          <h2>应用技术路线</h2>
-        </div>
-        <div class="timeline-grid">
-          <article class="timeline-card">
-            <h3>缓存</h3>
-            <p>理解浏览器缓存、CDN、Redis、本地缓存，以及缓存穿透、击穿、雪崩。</p>
-          </article>
-          <article class="timeline-card">
-            <h3>消息队列</h3>
-            <p>理解异步削峰、解耦、重试、顺序消费、幂等处理和死信队列。</p>
-          </article>
-          <article class="timeline-card">
-            <h3>搜索</h3>
-            <p>理解倒排索引、全文检索、分词、排序和推荐与搜索的边界。</p>
-          </article>
-          <article class="timeline-card">
-            <h3>日志与监控</h3>
-            <p>理解访问日志、应用日志、指标、链路追踪和告警，知道故障时先看什么。</p>
-          </article>
-        </div>
-        <div class="content-grid two-col section-gap-top">
-          <article class="content-card">
-            <h3>继续深入数据库</h3>
-            <p>如果你发现自己在网络和后端之间最卡的是数据建模、索引和事务，那么下一步最该去数据库专题。</p>
-            <a class="button secondary small" href="database.html">去数据库专题</a>
-          </article>
-          <article class="content-card">
-            <h3>继续深入操作系统</h3>
-            <p>如果你开始频繁接触并发、IO 和性能问题，操作系统专题会帮助你把很多“现象”变成“原理”。</p>
-            <a class="button secondary small" href="os.html">去操作系统专题</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-heading">
-          <p class="section-kicker">Questions</p>
-          <h2>你应该能回答的知识点</h2>
-        </div>
-        <div class="qa-grid">
-          <article class="qa-card">
-            <h3>为什么浏览器输入 URL 后会看到页面？</h3>
-            <p>至少要能讲清 DNS、TCP 连接、TLS、HTTP 请求、服务端处理、浏览器解析渲染这几段。</p>
-          </article>
-          <article class="qa-card">
-            <h3>为什么需要缓存，缓存会带来什么问题？</h3>
-            <p>要能讲性能收益，也要能讲一致性、失效策略和热点问题。</p>
-          </article>
-          <article class="qa-card">
-            <h3>为什么消息队列能削峰？</h3>
-            <p>要能把“请求高峰”和“消费速度”分开理解，而不是只会背定义。</p>
-          </article>
-          <article class="qa-card">
-            <h3>JWT 和 Session 的取舍是什么？</h3>
-            <p>要能从服务端状态、扩展性、安全性和主动失效来回答。</p>
           </article>
         </div>
       </section>
     </main>
   </div>
-  <script src="shared.js"></script>
 </body>
 </html>

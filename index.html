@@ -1,196 +1,145 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#13315c">
+  <meta name="theme-color" content="#12324a">
   <title>编程学习路线图</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body data-page-title="首页">
-  <div class="page-shell">
-    <nav class="top-nav">
-      <a class="brand-link" href="index.html">学习路线图</a>
-      <div class="nav-links">
-        <a class="nav-link active" href="index.html">首页</a>
-        <a class="nav-link" href="advanced.html">进阶路线</a>
-        <a class="nav-link" href="systems.html">网络与应用技术</a>
-        <a class="nav-link" href="database.html">数据库专题</a>
-        <a class="nav-link" href="os.html">操作系统</a>
-        <a class="nav-link" href="testing.html">软件测试</a>
-        <a class="nav-link" href="interview.html">面试专题</a>
-      </div>
-      <button class="theme-toggle" id="theme-toggle" type="button">切换夜间</button>
-    </nav>
-    <header class="hero">
-      <p class="eyebrow">Mobile Study Roadmap</p>
-      <h1>编程学习技术总路线</h1>
-      <p class="hero-copy">
-        把零基础、前端、后端、Python 和每日计划整合成一个能在手机上反复查看、逐步执行的学习站。
-      </p>
-      <div class="hero-actions">
-        <a class="button primary" href="#roadmaps">开始学习</a>
-        <a class="button secondary" href="#daily">看每日计划</a>
-      </div>
-      <div class="hero-stats">
-        <article>
-          <strong>5</strong>
-          <span>条完整路线</span>
-        </article>
-        <article>
-          <strong>12</strong>
-          <span>周可执行节奏</span>
-        </article>
-        <article>
-          <strong>1</strong>
-          <span>部手机即可复习</span>
-        </article>
-      </div>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">学习路线图</a>
+      <nav class="site-nav" aria-label="主导航">
+        <a class="is-active" href="index.html">首页</a>
+        <a href="advanced.html">进阶路线</a>
+        <a href="systems.html">网络与应用</a>
+        <a href="interview.html">面试专题</a>
+      </nav>
     </header>
 
     <main>
-      <section class="section intro-card">
-        <div>
-          <p class="section-kicker">学习方法</p>
-          <h2>先做项目，再补概念</h2>
-        </div>
-        <p>
-          每一条路线都按“阶段目标、每周动作、交付项目、验收标准”来设计。你不需要一次学完所有技术，只要先选一条主线，把每天的动作做出来。
-        </p>
-      </section>
-
-      <section class="section">
-        <div id="learning-app-root"></div>
-      </section>
-
-      <section class="section">
-        <div class="section-heading">
-          <p class="section-kicker">Backend</p>
-          <h2>后端接入状态</h2>
-        </div>
-        <div id="backend-api-root"></div>
-      </section>
-
-      <section class="section">
-        <div class="section-heading">
-          <p class="section-kicker">Recent</p>
-          <h2>最近学习</h2>
-        </div>
-        <div id="recent-panel" class="favorites-panel"></div>
-      </section>
-
-      <section class="section">
-        <div class="section-heading">
-          <p class="section-kicker">Special Pages</p>
-          <h2>专题学习入口</h2>
-        </div>
-        <div class="topic-grid">
-          <article class="topic-card">
-            <p class="section-kicker">Advanced</p>
-            <h3>进阶路线</h3>
-            <p>把初级路线之后该补的工程能力、架构思维、性能和协作拆成独立路线，适合开始向中级开发者迈进。</p>
-            <a class="button secondary small" href="advanced.html">打开页面</a>
-          </article>
-          <article class="topic-card">
-            <p class="section-kicker">Systems</p>
-            <h3>网络与应用技术</h3>
-            <p>集中梳理 HTTP、TCP/IP、缓存、消息队列、鉴权、搜索、日志和监控，让底层认知与业务技术一起补齐。</p>
-            <a class="button secondary small" href="systems.html">打开页面</a>
-          </article>
-          <article class="topic-card">
-            <p class="section-kicker">Database</p>
-            <h3>数据库专题</h3>
-            <p>补齐表设计、索引、事务、锁、SQL 优化、Redis 缓存与高频面试点，形成真正能落地的存储认知。</p>
-            <a class="button secondary small" href="database.html">打开页面</a>
-          </article>
-          <article class="topic-card">
-            <p class="section-kicker">Operating System</p>
-            <h3>操作系统专题</h3>
-            <p>理解进程线程、内存、文件 IO、并发、调度与系统调用，建立更扎实的底层思维。</p>
-            <a class="button secondary small" href="os.html">打开页面</a>
-          </article>
-          <article class="topic-card">
-            <p class="section-kicker">Testing</p>
-            <h3>软件测试专题</h3>
-            <p>补齐单元测试、集成测试、接口测试、UI 自动化、性能测试、测试左移与测试面试表达。</p>
-            <a class="button secondary small" href="testing.html">打开页面</a>
-          </article>
-          <article class="topic-card">
-            <p class="section-kicker">Interview</p>
-            <h3>面试专题</h3>
-            <p>整理自我介绍、项目讲解、八股知识、算法准备和复盘方法，让学习内容更容易转换成面试表达。</p>
-            <a class="button secondary small" href="interview.html">打开页面</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="section framework-grid">
-        <article class="framework-card">
-          <p class="section-kicker">阶段结构</p>
-          <h3>阶段 1</h3>
-          <p>学语言与基础语法，练会输入、输出、条件、循环、函数、数组和对象。</p>
-        </article>
-        <article class="framework-card">
-          <p class="section-kicker">阶段结构</p>
-          <h3>阶段 2</h3>
-          <p>做小项目，把 Git、调试、命令行和基础算法穿插进去，不让知识停留在记忆层。</p>
-        </article>
-        <article class="framework-card">
-          <p class="section-kicker">阶段结构</p>
-          <h3>阶段 3</h3>
-          <p>进入框架、数据库、接口和部署，开始做能上线、能分享、能复用的作品。</p>
-        </article>
-      </section>
-
-      <section class="section" id="daily">
-        <div class="section-heading">
-          <p class="section-kicker">Execution</p>
-          <h2>每天怎么学</h2>
-        </div>
-        <div class="daily-layout">
-          <article class="daily-card">
-            <h3>平日 90 分钟模板</h3>
-            <ul>
-              <li><strong>20 分钟</strong> 学新概念，只看今天真正要用到的内容。</li>
-              <li><strong>50 分钟</strong> 写代码或做练习，不跳步骤。</li>
-              <li><strong>20 分钟</strong> 复盘，总结一个 bug、一个知识点、一个明天任务。</li>
-            </ul>
-          </article>
-          <article class="daily-card">
-            <h3>周末 3 小时模板</h3>
-            <ul>
-              <li><strong>1 小时</strong> 完成本周项目功能。</li>
-              <li><strong>1 小时</strong> 查漏补缺，补看数据库、Git、接口或算法。</li>
-              <li><strong>1 小时</strong> 整理笔记并发布到 GitHub。</li>
-            </ul>
-          </article>
-        </div>
-        <div class="checklist-card">
-          <div class="checklist-header">
-            <div>
-              <p class="section-kicker">Checklist</p>
-              <h3>今日完成清单</h3>
-            </div>
-            <button class="button secondary small" id="reset-progress" type="button">重置打卡</button>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Study Roadmaps</p>
+          <h1>把编程学习整理成可执行的路线，而不是零散收藏。</h1>
+          <p>
+            这个站点只保留学习真正需要的内容：方向选择、阶段目标、推荐资源和下一步行动。
+            复杂打卡、收藏和演示型功能都已经收掉，阅读和复习会更轻松。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#roadmaps">开始选择路线</a>
+            <a class="button secondary" href="#method">看学习方法</a>
           </div>
-          <label><input type="checkbox" data-check="study-1"> 今天完成 20 分钟概念学习</label>
-          <label><input type="checkbox" data-check="study-2"> 今天写了至少 30 行有效代码</label>
-          <label><input type="checkbox" data-check="study-3"> 今天记录了一个问题和解决办法</label>
-          <label><input type="checkbox" data-check="study-4"> 今天把下一步任务写清楚了</label>
-          <p class="hint">打卡记录会保存在当前浏览器，手机打开后也能继续使用。</p>
+        </div>
+        <div class="hero-panel">
+          <p class="panel-title">推荐使用方式</p>
+          <ul class="plain-list">
+            <li>先选一条主路线，坚持 4 到 6 周。</li>
+            <li>每天学一个概念，配一个小练习。</li>
+            <li>每周做一个能运行的小项目。</li>
+            <li>学会后尽快转成作品和面试表达。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="method">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Method</p>
+            <h2>更适合长期学习的节奏</h2>
+          </div>
+        </div>
+        <div class="card-grid three-up">
+          <article class="info-card">
+            <h3>先做项目</h3>
+            <p>不要把大部分时间花在收藏教程上。每一阶段都配一个小项目，把语法和知识点放进真实练习里。</p>
+          </article>
+          <article class="info-card">
+            <h3>分层学习</h3>
+            <p>先学语言和工具，再学框架和数据库，最后补工程、网络、测试和面试表达，顺序不要反过来。</p>
+          </article>
+          <article class="info-card">
+            <h3>轻量复习</h3>
+            <p>每天复习一页路线，每周只检查自己做出了什么，不再靠花哨功能制造“看起来很努力”的错觉。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="roadmaps">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Roadmaps</p>
+            <h2>选择你的主路线</h2>
+          </div>
+          <p class="section-note">建议一次只主攻一条，其他方向放到专题页做补充。</p>
+        </div>
+
+        <div class="chip-row" role="tablist" aria-label="学习路线切换">
+          <button class="route-chip is-active" type="button" data-route="starter" aria-selected="true">零基础</button>
+          <button class="route-chip" type="button" data-route="frontend" aria-selected="false">前端</button>
+          <button class="route-chip" type="button" data-route="backend" aria-selected="false">后端</button>
+          <button class="route-chip" type="button" data-route="python" aria-selected="false">Python</button>
+          <button class="route-chip" type="button" data-route="testing" aria-selected="false">软件测试</button>
+        </div>
+
+        <div id="route-panel" class="route-panel" aria-live="polite"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Topics</p>
+            <h2>需要补充时，再进入专题页</h2>
+          </div>
+        </div>
+        <div class="card-grid three-up">
+          <article class="topic-card">
+            <p class="topic-kicker">进阶路线</p>
+            <h3>从会写代码，走向会交付</h3>
+            <p>补工程化、协作、部署、测试和性能，把能力从“能做”推进到“能上线”。</p>
+            <a class="text-link" href="advanced.html">打开进阶路线</a>
+          </article>
+          <article class="topic-card">
+            <p class="topic-kicker">网络与应用</p>
+            <h3>把底层原理和常见应用串起来</h3>
+            <p>按 HTTP、TCP/IP、缓存、消息队列、鉴权、监控这些主题做专项学习。</p>
+            <a class="text-link" href="systems.html">打开网络与应用</a>
+          </article>
+          <article class="topic-card">
+            <p class="topic-kicker">面试专题</p>
+            <h3>把学习成果转成表达能力</h3>
+            <p>整理自我介绍、项目讲解、高频问题和复盘方式，让路线最终落到求职和晋升上。</p>
+            <a class="text-link" href="interview.html">打开面试专题</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Hosting</p>
+            <h2>正式服务器托管预留</h2>
+          </div>
+        </div>
+        <div class="card-grid two-up">
+          <article class="info-card">
+            <h3>前端现在怎么接</h3>
+            <p>首页会优先请求 <code>/api/roadmaps</code>，如果正式服务器接口不可用，再自动回退到本地内置路线数据。</p>
+          </article>
+          <article class="info-card">
+            <h3>以后怎么扩展</h3>
+            <p>后端已经预留 <code>/api/health</code>、<code>/api/site</code> 和 <code>/api/roadmaps</code>，后面接数据库、用户系统或后台都可以从这里继续长出来。</p>
+          </article>
         </div>
       </section>
     </main>
   </div>
 
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/htm@3.1.1/dist/htm.umd.js"></script>
-  <script src="routes-data.js"></script>
-  <script src="app-react.js"></script>
-  <script src="shared.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
