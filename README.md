@@ -34,30 +34,41 @@ http://localhost:3000
 
 首页会优先读取 `/api/roadmaps`，如果接口不可用，会自动回退到前端内置数据。
 
-## 适合后续部署的平台
+## 推荐托管方式：GitHub Pages
+
+这个项目当前最适合直接用 GitHub Pages 托管。
+
+原因很简单：
+
+- 当前站点的核心内容已经可以纯静态运行
+- 首页即使拿不到 `/api/roadmaps`，也会自动回退到前端内置学习路线
+- 仓库已经自带 GitHub Pages 工作流，会在 `main` 分支推送后自动发布静态页面
+
+### 启用步骤
+
+1. 打开 GitHub 仓库 `Tbox-creater/codex-practice`
+2. 进入 `Settings`
+3. 打开 `Pages`
+4. 在 `Build and deployment` 中选择 `GitHub Actions`
+5. 等待 Actions 中的 `Deploy GitHub Pages` 工作流跑完
+
+### 预计访问地址
+
+`https://tbox-creater.github.io/codex-practice/`
+
+## 预留的正式托管接口
+
+虽然 GitHub Pages 只托管静态页面，但项目里仍然保留了 Node 服务入口，方便以后切换到正式服务器平台：
+
+- `GET /api/health`
+- `GET /api/site`
+- `GET /api/roadmaps`
+
+## 其他可选部署平台
 
 - Render
 - Railway
 - Fly.io
 - 自建 Linux 服务器 + Node.js / Nginx
 
-## 推荐部署方式：Render
-
-仓库已经包含 `render.yaml`，适合直接作为 Render Blueprint 使用。
-
-### 部署步骤
-
-1. 登录 [Render](https://render.com/)
-2. 选择 `New +` -> `Blueprint`
-3. 连接 GitHub 仓库 `Tbox-creater/codex-practice`
-4. 选择分支 `main`
-5. 确认 Render 识别到 `render.yaml`
-6. 点击创建并等待首次部署完成
-
-### 部署后检查
-
-- 健康检查地址：`/api/health`
-- 站点接口说明：`/api/site`
-- 路线数据接口：`/api/roadmaps`
-
-首次部署成功后，你会得到一个 `onrender.com` 地址，手机可直接打开。
+如果后面你想让后端接口真的在线可用，再切去 Render 这类支持 Node.js 的平台会更合适。
