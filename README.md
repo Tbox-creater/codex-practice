@@ -40,3 +40,24 @@ http://localhost:3000
 - Railway
 - Fly.io
 - 自建 Linux 服务器 + Node.js / Nginx
+
+## 推荐部署方式：Render
+
+仓库已经包含 `render.yaml`，适合直接作为 Render Blueprint 使用。
+
+### 部署步骤
+
+1. 登录 [Render](https://render.com/)
+2. 选择 `New +` -> `Blueprint`
+3. 连接 GitHub 仓库 `Tbox-creater/codex-practice`
+4. 选择分支 `main`
+5. 确认 Render 识别到 `render.yaml`
+6. 点击创建并等待首次部署完成
+
+### 部署后检查
+
+- 健康检查地址：`/api/health`
+- 站点接口说明：`/api/site`
+- 路线数据接口：`/api/roadmaps`
+
+首次部署成功后，你会得到一个 `onrender.com` 地址，手机可直接打开。

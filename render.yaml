@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: codex-practice
+    runtime: node
+    region: singapore
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: API_BASE_URL
+        value: /api
