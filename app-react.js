@@ -255,33 +255,55 @@ function BackendPanel() {
   const [health, setHealth] = useState(null);
   const [highlights, setHighlights] = useState([]);
   const [tips, setTips] = useState([]);
+  const [entries, setEntries] = useState([]);
+  const [feedbackItems, setFeedbackItems] = useState([]);
+  const [summary, setSummary] = useState(null);
   const [error, setError] = useState("");
+  const [entryForm, setEntryForm] = useState({
+    title: "",
+    focusArea: "backend",
+    status: "planned",
+    note: ""
+  });
+  const [feedbackForm, setFeedbackForm] = useState({
+    name: "",
+    message: ""
+  });
 
   useEffect(() => {
     let cancelled = false;
 
     async function loadBackendData() {
       try {
-        const [healthRes, highlightsRes, tipsRes] = await Promise.all([
+        const [healthRes, highlightsRes, tipsRes, entriesRes, feedbackRes, summaryRes] = await Promise.all([
           fetch("/api/health"),
           fetch("/api/backend/highlights"),
-          fetch("/api/interview/tips")
+          fetch("/api/interview/tips"),
+          fetch("/api/study/entries"),
+          fetch("/api/feedback"),
+          fetch("/api/study/summary")
         ]);
 
-        if (!healthRes.ok || !highlightsRes.ok || !tipsRes.ok) {
+        if (!healthRes.ok || !highlightsRes.ok || !tipsRes.ok || !entriesRes.ok || !feedbackRes.ok || !summaryRes.ok) {
           throw new Error("Backend API request failed");
         }
 
-        const [healthJson, highlightsJson, tipsJson] = await Promise.all([
+        const [healthJson, highlightsJson, tipsJson, entriesJson, feedbackJson, summaryJson] = await Promise.all([
           healthRes.json(),
           highlightsRes.json(),
-          tipsRes.json()
+          tipsRes.json(),
+          entriesRes.json(),
+          feedbackRes.json(),
+          summaryRes.json()
         ]);
 
         if (cancelled) return;
         setHealth(healthJson);
         setHighlights(highlightsJson.items || []);
         setTips(tipsJson.tips || []);
+        setEntries(entriesJson.items || []);
+        setFeedbackItems(feedbackJson.items || []);
+        setSummary(summaryJson);
       } catch (loadError) {
         if (cancelled) return;
         setError("当前还没有通过后端启动站点。运行 npm install 和 npm start 后，这里会显示 API 数据。");
@@ -302,13 +324,74 @@ function BackendPanel() {
     `;
   }
 
+  async function submitEntry(event) {
+    event.preventDefault();
+    const response = await fetch("/api/study/entries", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(entryForm)
+    });
+
+    if (!response.ok) {
+      setError("学习记录保存失败，请确认后端正在运行。");
+      return;
+    }
+
+    const saved = await response.json();
+    setEntries((current) => [saved, ...current].slice(0, 8));
+    setSummary((current) => ({
+      ...current,
+      metrics: {
+        ...(current?.metrics || {}),
+        studyEntryCount: (current?.metrics?.studyEntryCount || 0) + 1
+      },
+      latestEntry: saved
+    }));
+    setEntryForm({
+      title: "",
+      focusArea: "backend",
+      status: "planned",
+      note: ""
+    });
+  }
+
+  async function submitFeedback(event) {
+    event.preventDefault();
+    const response = await fetch("/api/feedback", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(feedbackForm)
+    });
+
+    if (!response.ok) {
+      setError("反馈保存失败，请确认后端正在运行。");
+      return;
+    }
+
+    const saved = await response.json();
+    setFeedbackItems((current) => [saved, ...current].slice(0, 6));
+    setSummary((current) => ({
+      ...current,
+      metrics: {
+        ...(current?.metrics || {}),
+        feedbackCount: (current?.metrics?.feedbackCount || 0) + 1
+      },
+      latestFeedback: saved
+    }));
+    setFeedbackForm({
+      name: "",
+      message: ""
+    });
+  }
+
   return html`
     <div className="dashboard-grid">
       <article className="dashboard-card">
         <p className="section-kicker">Health</p>
         <h2>${health ? "后端在线" : "检查后端中"}</h2>
         <p className="dashboard-copy">${health ? `服务：${health.service}` : "正在请求 /api/health"}</p>
-        <p className="dashboard-copy">${health ? `框架：${health.framework}` : "请稍候"}</p>
+        <p className="dashboard-copy">${health ? `框架：${health.framework} + ${health.database}` : "请稍候"}</p>
+        <p className="dashboard-copy">${summary ? `学习记录 ${summary.metrics.studyEntryCount} 条，反馈 ${summary.metrics.feedbackCount} 条` : "正在加载数据库摘要"}</p>
       </article>
       <article className="dashboard-card">
         <p className="section-kicker">Interview</p>
@@ -326,6 +409,54 @@ function BackendPanel() {
               <p className="section-kicker">${item.level}</p>
               <h3>${item.title}</h3>
               <p>${item.summary}</p>
+            </article>
+          `)}
+        </div>
+      </article>
+      <article className="dashboard-card backend-span">
+        <p className="section-kicker">SQLite</p>
+        <h2>学习记录入库</h2>
+        <form className="tool-stack" onSubmit=${submitEntry}>
+          <input className="search-input" placeholder="记录标题，例如：补完 Express 中间件" value=${entryForm.title} onInput=${(event) => setEntryForm({ ...entryForm, title: event.target.value })} />
+          <div className="content-grid two-col">
+            <select className="search-input" value=${entryForm.focusArea} onChange=${(event) => setEntryForm({ ...entryForm, focusArea: event.target.value })}>
+              <option value="backend">后端</option>
+              <option value="database">数据库</option>
+              <option value="testing">测试</option>
+              <option value="system">系统</option>
+            </select>
+            <select className="search-input" value=${entryForm.status} onChange=${(event) => setEntryForm({ ...entryForm, status: event.target.value })}>
+              <option value="planned">计划中</option>
+              <option value="in_progress">进行中</option>
+              <option value="done">已完成</option>
+            </select>
+          </div>
+          <textarea className="search-input textarea-input" placeholder="写下今天学了什么、卡在哪里、下一步准备做什么" value=${entryForm.note} onInput=${(event) => setEntryForm({ ...entryForm, note: event.target.value })}></textarea>
+          <button className="button primary" type="submit">保存学习记录</button>
+        </form>
+        <div className="content-grid two-col section-gap-top">
+          ${entries.map((entry) => html`
+            <article className="content-card" key=${entry.id}>
+              <p className="section-kicker">${entry.focusArea} · ${entry.status}</p>
+              <h3>${entry.title}</h3>
+              <p>${entry.note}</p>
+            </article>
+          `)}
+        </div>
+      </article>
+      <article className="dashboard-card backend-span">
+        <p className="section-kicker">Feedback</p>
+        <h2>站点反馈入库</h2>
+        <form className="tool-stack" onSubmit=${submitFeedback}>
+          <input className="search-input" placeholder="你的名字" value=${feedbackForm.name} onInput=${(event) => setFeedbackForm({ ...feedbackForm, name: event.target.value })} />
+          <textarea className="search-input textarea-input" placeholder="写下你希望网站继续增加的内容或功能" value=${feedbackForm.message} onInput=${(event) => setFeedbackForm({ ...feedbackForm, message: event.target.value })}></textarea>
+          <button className="button primary" type="submit">提交反馈</button>
+        </form>
+        <div className="content-grid two-col section-gap-top">
+          ${feedbackItems.map((item) => html`
+            <article className="content-card" key=${item.id}>
+              <p className="section-kicker">${item.name}</p>
+              <p>${item.message}</p>
             </article>
           `)}
         </div>

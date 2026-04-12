@@ -14,6 +14,14 @@ Then open:
 
 `http://localhost:3000`
 
+## Backend features
+
+- Express server
+- SQLite persistence
+- Study entries API
+- Feedback API
+- Backend summary API
+
 ## Publish for phone use
 
 This repository includes a GitHub Pages workflow. After GitHub Pages is enabled for this repository, the site can be published from GitHub Actions.
