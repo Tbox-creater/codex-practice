@@ -250,3 +250,91 @@ function LearningApp() {
 
 const root = ReactDOM.createRoot(document.getElementById("learning-app-root"));
 root.render(html`<${LearningApp} />`);
+
+function BackendPanel() {
+  const [health, setHealth] = useState(null);
+  const [highlights, setHighlights] = useState([]);
+  const [tips, setTips] = useState([]);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadBackendData() {
+      try {
+        const [healthRes, highlightsRes, tipsRes] = await Promise.all([
+          fetch("/api/health"),
+          fetch("/api/backend/highlights"),
+          fetch("/api/interview/tips")
+        ]);
+
+        if (!healthRes.ok || !highlightsRes.ok || !tipsRes.ok) {
+          throw new Error("Backend API request failed");
+        }
+
+        const [healthJson, highlightsJson, tipsJson] = await Promise.all([
+          healthRes.json(),
+          highlightsRes.json(),
+          tipsRes.json()
+        ]);
+
+        if (cancelled) return;
+        setHealth(healthJson);
+        setHighlights(highlightsJson.items || []);
+        setTips(tipsJson.tips || []);
+      } catch (loadError) {
+        if (cancelled) return;
+        setError("当前还没有通过后端启动站点。运行 npm install 和 npm start 后，这里会显示 API 数据。");
+      }
+    }
+
+    loadBackendData();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (error) {
+    return html`
+      <article className="dashboard-card">
+        <p className="dashboard-copy">${error}</p>
+      </article>
+    `;
+  }
+
+  return html`
+    <div className="dashboard-grid">
+      <article className="dashboard-card">
+        <p className="section-kicker">Health</p>
+        <h2>${health ? "后端在线" : "检查后端中"}</h2>
+        <p className="dashboard-copy">${health ? `服务：${health.service}` : "正在请求 /api/health"}</p>
+        <p className="dashboard-copy">${health ? `框架：${health.framework}` : "请稍候"}</p>
+      </article>
+      <article className="dashboard-card">
+        <p className="section-kicker">Interview</p>
+        <h2>后端面试提示</h2>
+        <ul>
+          ${tips.map((tip) => html`<li key=${tip}>${tip}</li>`)}
+        </ul>
+      </article>
+      <article className="dashboard-card backend-span">
+        <p className="section-kicker">Highlights</p>
+        <h2>后端技术主线</h2>
+        <div className="content-grid three-col">
+          ${highlights.map((item) => html`
+            <article className="content-card" key=${item.title}>
+              <p className="section-kicker">${item.level}</p>
+              <h3>${item.title}</h3>
+              <p>${item.summary}</p>
+            </article>
+          `)}
+        </div>
+      </article>
+    </div>
+  `;
+}
+
+const backendRoot = document.getElementById("backend-api-root");
+if (backendRoot) {
+  ReactDOM.createRoot(backendRoot).render(html`<${BackendPanel} />`);
+}

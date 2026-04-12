@@ -4,7 +4,15 @@ A mobile-friendly programming study roadmap site.
 
 ## Open locally
 
-Open `index.html` in a browser.
+Install dependencies and run:
+
+`npm install`
+
+`npm start`
+
+Then open:
+
+`http://localhost:3000`
 
 ## Publish for phone use
 

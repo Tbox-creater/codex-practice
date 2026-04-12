@@ -1,0 +1,12 @@
+{
+  "name": "codex-practice-study-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Programming study roadmap site with a lightweight backend API.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
